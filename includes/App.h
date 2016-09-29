@@ -1,0 +1,35 @@
+/*
+  Run Application, starting point.
+  And Validation layers to help debugging.
+*/
+
+#ifndef _APP_H
+#define _APP_H
+
+#include "stdafx.h"
+#include "GInput.h"
+#include "Globals.h"
+
+namespace zLeafEngine
+{
+	class App : private GInput
+	{
+		public:
+			//Init App Point
+			void run();
+
+		private:
+			//Init App Point
+			void initWindow();
+			void initVulkan();
+			void mainLoop();
+
+			//Instance
+			void createInstance();
+
+			//Window
+			static void onWindowResized(GLFWwindow* window, int width, int height);
+	};
+}
+
+#endif // !_APP_H
