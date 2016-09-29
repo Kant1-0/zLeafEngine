@@ -1,4 +1,7 @@
 
+//Defines functions bodies for STB
+#define STB_IMAGE_IMPLEMENTATION 
+
 #include "App.h"
 
 int		main()

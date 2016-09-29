@@ -10,7 +10,7 @@
 
 namespace zLeafEngine
 {
-	class LogicalDevices : protected PhysicalDevices
+	class LogicalDevices : protected PhysicalDevices //-> VTextures
 	{
 		protected:
 			//Commands (FrameBuffer)
@@ -27,6 +27,8 @@ namespace zLeafEngine
 
 			//Swap Chain
 			VDeleter<VkSwapchainKHR> mSwapChain{ mDevice, vkDestroySwapchainKHR };
+			std::vector<VkImage> swapChainImages;
+
 			void createSwapChain();
 
 			//Image Views
@@ -34,12 +36,8 @@ namespace zLeafEngine
 			VkFormat swapChainImageFormat;
 			std::vector<VDeleter<VkImageView>> swapChainImageViews;
 
-			void createImageViews();
-
 		private:
 			//Swap Chain
-			std::vector<VkImage> swapChainImages;
-
 			VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
 			VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> availablePresentModes);
 			VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);

@@ -6,23 +6,29 @@ namespace zLeafEngine
 	//Triangle
 	const std::vector<VertexBuffers::Vertex> VertexBuffers::triangleVertices =
 	{
-		{ { 0.0f, -0.5f },{ 1.0f, 0.0f, 0.0f } },
-		{ { 0.5f,  0.5f },{ 0.0f, 1.0f, 0.0f } },
-		{ { -0.5f,  0.5f },{ 0.0f, 0.0f, 1.0f } }
+		{ {  0.0f, -0.5f, 0.0f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+		{ {  0.5f,  0.5f, 0.0f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+		{ { -0.5f,  0.5f, 0.0f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } }
 	};
 
 	//Rectangle
 	const std::vector<VertexBuffers::Vertex> VertexBuffers::rectangleVertices =
 	{
-		{ { -0.5f, -0.5f },{ 1.0f, 0.0f, 0.0f } },
-		{ { 0.5f, -0.5f },{ 0.0f, 1.0f, 0.0f } },
-		{ { 0.5f,  0.5f },{ 0.0f, 0.0f, 1.0f } },
-		{ { -0.5f,  0.5f },{ 1.0f, 1.0f, 0.0f } }
+		{ { -0.5f, -0.5f,  0.0f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+		{ {  0.5f, -0.5f,  0.0f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+		{ {  0.5f,  0.5f,  0.0f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+		{ { -0.5f,  0.5f,  0.0f },{ 1.0f, 1.0f, 0.0f },{ 0.0f, 1.0f } },
+
+		{ { -0.5f, -0.5f, -0.5f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+		{ {  0.5f, -0.5f, -0.5f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+		{ {  0.5f,  0.5f, -0.5f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+		{ { -0.5f,  0.5f, -0.5f },{ 1.0f, 1.0f, 0.0f },{ 0.0f, 1.0f } },
 	};
 
 	const std::vector<uint16_t> VertexBuffers::rectangleIndices =
 	{
-		0, 1, 2, 2, 3, 0
+		0, 1, 2, 2, 3, 0,
+		4, 5, 6, 6, 7, 4
 	};
 
 	//Vertex Buffer Functions
@@ -65,14 +71,14 @@ namespace zLeafEngine
 		return bindingDescription;
 	}
 
-	std::array<VkVertexInputAttributeDescription, 2> VertexBuffers::Vertex::getAttributeDescriptions()
+	std::array<VkVertexInputAttributeDescription, 3> VertexBuffers::Vertex::getAttributeDescriptions()
 	{
-		std::array<VkVertexInputAttributeDescription, 2> attributeDescriptions = {};
+		std::array<VkVertexInputAttributeDescription, 3> attributeDescriptions = {};
 
 		///inPosition (vec2)
 		attributeDescriptions[0].binding = 0;
 		attributeDescriptions[0].location = 0;
-		attributeDescriptions[0].format = VK_FORMAT_R32G32_SFLOAT;
+		attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
 		attributeDescriptions[0].offset = offsetof(Vertex, pos);
 
 		///inColor (vec3)
@@ -80,6 +86,12 @@ namespace zLeafEngine
 		attributeDescriptions[1].location = 1;
 		attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
 		attributeDescriptions[1].offset = offsetof(Vertex, color);
+
+		///inTexCoord (vec2)
+		attributeDescriptions[2].binding = 0;
+		attributeDescriptions[2].location = 2;
+		attributeDescriptions[2].format = VK_FORMAT_R32G32_SFLOAT;
+		attributeDescriptions[2].offset = offsetof(Vertex, texCoord);
 
 		return attributeDescriptions;
 	}

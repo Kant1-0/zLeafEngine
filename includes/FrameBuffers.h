@@ -11,7 +11,7 @@
 
 namespace zLeafEngine
 {
-	class FrameBuffers : protected GraphicsPipeline
+	class FrameBuffers : protected GraphicsPipeline //-> VTexels
 	{
 		protected:
 			//Descriptor Pool
@@ -22,17 +22,23 @@ namespace zLeafEngine
 			void createFramebuffers();
 
 			//Commands
+			std::vector<VkCommandBuffer> commandBuffers;
+
 			void createCommandPool();
 			void createCommandBuffers();
 
 			//Synchronization
+			VDeleter<VkSemaphore> imageAvailableSemaphore{ mDevice, vkDestroySemaphore };
+			VDeleter<VkSemaphore> renderFinishedSemaphore{ mDevice, vkDestroySemaphore };
+
 			void createSemaphores();
 
-			//Draw Frame
-			void drawFrame();
+			//Textures
+			VDeleter<VkImageView> textureImageView{ mDevice, vkDestroyImageView };
+			VDeleter<VkSampler> textureSampler{ mDevice, vkDestroySampler };
 
-			//Recreate Swap Chain
-			void recreateSwapChain();
+			//Depth Image View
+			VDeleter<VkImageView> depthImageView{ mDevice, vkDestroyImageView };
 
 		private:
 			//Descriptor Pool
@@ -41,13 +47,6 @@ namespace zLeafEngine
 
 			//Frame Buffers
 			std::vector<VDeleter<VkFramebuffer>> swapChainFramebuffers;
-
-			//Commands
-			std::vector<VkCommandBuffer> commandBuffers;
-
-			//Synchronization
-			VDeleter<VkSemaphore> imageAvailableSemaphore{ mDevice, vkDestroySemaphore };
-			VDeleter<VkSemaphore> renderFinishedSemaphore{ mDevice, vkDestroySemaphore };
 	};
 }
 

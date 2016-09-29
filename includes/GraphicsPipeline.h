@@ -12,7 +12,7 @@
 
 namespace zLeafEngine
 {
-	class GraphicsPipeline : protected VertexBuffers
+	class GraphicsPipeline : protected VertexBuffers //-> FrameBuffers
 	{
 		protected:
 			//Descriptor Set Layout
@@ -27,6 +27,10 @@ namespace zLeafEngine
 			VDeleter<VkPipeline> mGraphicsPipeline{ mDevice, vkDestroyPipeline };
 			VDeleter<VkPipelineLayout> pipelineLayout{ mDevice, vkDestroyPipelineLayout };
 			void createGraphicsPipeline();
+
+			//Depth Supported Format
+			VkFormat findDepthFormat();
+			VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
 
 		private:
 			/*//Graphics Pipeline

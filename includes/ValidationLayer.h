@@ -12,13 +12,11 @@
 
 namespace zLeafEngine
 {
-	class ValidationLayer : protected VInstance
+	class ValidationLayer: protected VInstance //-> LogicalDevices
 	{
 		protected:
 			//Validation Layer (Debug)
 			void setupDebugCallback();
-			bool checkValidationLayerSupport();
-			static const std::vector<const char*> validationLayers;
 
 		private:
 			//Message Callback
@@ -26,6 +24,7 @@ namespace zLeafEngine
 
 			static VkResult CreateDebugReportCallbackEXT(VkInstance instance, const VkDebugReportCallbackCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugReportCallbackEXT* pCallback);
 			static void DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT callback, const VkAllocationCallbacks* pAllocator);
+
 			static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT objType, uint64_t obj, size_t location, int32_t code, const char* layerPrefix, const char* msg, void* userData);
 	};
 }

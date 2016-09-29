@@ -10,7 +10,7 @@
 
 namespace zLeafEngine
 {
-	class VBuffer : protected LogicalDevices
+	class VBuffer : protected LogicalDevices //-> VertexBuffer
 	{
 		protected:
 		//Buffer Creation
@@ -18,7 +18,10 @@ namespace zLeafEngine
 
 			void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
 
-		private:
+			//Layout Transitions
+			VkCommandBuffer beginSingleTimeCommands();
+			void endSingleTimeCommands(VkCommandBuffer commandBuffer);
+
 			//Handle Memory
 			uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 	};

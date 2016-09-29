@@ -8,11 +8,10 @@
 
 #include "stdafx.h"
 #include "ValidationLayer.h"
-#include "Globals.h"
 
 namespace zLeafEngine
 {
-	class PhysicalDevices : protected ValidationLayer
+	class PhysicalDevices : protected ValidationLayer //-> LogicalDevices
 	{
 		protected:
 			//Physical Devices
@@ -34,8 +33,6 @@ namespace zLeafEngine
 			QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 
 			//Window Surface
-			static GLFWwindow* window;
-
 			VDeleter<VkSurfaceKHR> surface{ mInstance, vkDestroySurfaceKHR };
 			void createSurface();
 

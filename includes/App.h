@@ -8,7 +8,6 @@
 
 #include "stdafx.h"
 #include "GInput.h"
-#include "Globals.h"
 
 namespace zLeafEngine
 {
@@ -23,9 +22,6 @@ namespace zLeafEngine
 			void initWindow();
 			void initVulkan();
 			void mainLoop();
-
-			//Instance
-			void createInstance();
 
 			//Window
 			static void onWindowResized(GLFWwindow* window, int width, int height);

@@ -11,19 +11,20 @@
 
 namespace zLeafEngine
 {
-	class VertexBuffers : protected VBuffer
+	class VertexBuffers : protected VBuffer //-> GraphicsPipeline
 	{
 		protected:
 			//Vertex Data
 			struct Vertex
 			{
-				glm::vec2 pos;
+				glm::vec3 pos;
 				glm::vec3 color;
+				glm::vec2 texCoord;
 
 				///Binding Descriptions
 				static VkVertexInputBindingDescription getBindingDescription();
 				///Attribute Descriptions
-				static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions();
+				static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions();
 			};
 
 			struct UniformBufferObject

@@ -6,11 +6,11 @@
 #define _GINPUT_H
 
 #include "stdafx.h"
-#include "FrameBuffers.h"
+#include "DrawFrame.h"
 
 namespace zLeafEngine
 {
-	class GInput : protected FrameBuffers
+	class GInput : protected DrawFrame //-> App
 	{
 		public:
 			static void inputKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);

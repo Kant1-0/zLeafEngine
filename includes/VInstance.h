@@ -8,18 +8,24 @@
 #define _VINSTANCE_H
 
 #include "stdafx.h"
+#include "Globals.h"
 #include "VDeleter.h"
 
 namespace zLeafEngine
 {
-	class VInstance
+	class VInstance //-> ValidationLayer
 	{
 		protected:
 			//Vulkan Instance (App)
 			VDeleter<VkInstance> mInstance{ vkDestroyInstance };
+			void createInstance();
 
-			//GLFW Extensions (App)
-			std::vector<const char*> getRequiredExtensions();
+			//GLFW Window
+			static GLFWwindow* window;
+
+			//Validation Layers
+			static const std::vector<const char*> validationLayers;
+			bool checkValidationLayerSupport();
 
 			//Macro for Debug
 			#ifdef NDEBUG
@@ -27,6 +33,10 @@ namespace zLeafEngine
 			#else
 			const bool enableValidationLayers = true;
 			#endif
+
+		private:
+			//GLFW Extensions for Vulkan
+			std::vector<const char*> getRequiredExtensions();
 	};
 }
 

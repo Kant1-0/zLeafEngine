@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="srcs\App.cpp" />
+    <ClCompile Include="srcs\DepthBuffers.cpp" />
+    <ClCompile Include="srcs\DrawFrame.cpp" />
     <ClCompile Include="srcs\FrameBuffers.cpp" />
     <ClCompile Include="srcs\GInput.cpp" />
     <ClCompile Include="srcs\Globals.cpp" />
@@ -31,9 +33,12 @@
     <ClCompile Include="srcs\VBuffer.cpp" />
     <ClCompile Include="srcs\VertexBuffers.cpp" />
     <ClCompile Include="srcs\VInstance.cpp" />
+    <ClCompile Include="srcs\VTexels.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\App.h" />
+    <ClInclude Include="includes\DepthBuffers.h" />
+    <ClInclude Include="includes\DrawFrame.h" />
     <ClInclude Include="includes\FrameBuffers.h" />
     <ClInclude Include="includes\GInput.h" />
     <ClInclude Include="includes\GraphicsPipeline.h" />
@@ -46,10 +51,16 @@
     <ClInclude Include="includes\VDeleter.h" />
     <ClInclude Include="includes\VertexBuffers.h" />
     <ClInclude Include="includes\VInstance.h" />
+    <ClInclude Include="includes\VTexels.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\frag.spv" />
     <None Include="shaders\shader.frag" />
     <None Include="shaders\shader.vert" />
+    <None Include="shaders\vert.spv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\texture.jpg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{f72715b0-03bd-4817-b737-66575c9f828d}</ProjectGuid>
@@ -130,7 +141,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Dvpt Engine\VulkanSDK\1.0.24.0\Include;D:\Dvpt Engine\GLM;D:\Dvpt Engine\GLFW\Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Dvpt Engine\STB;D:\Dvpt Engine\VulkanSDK\1.0.24.0\Include;D:\Dvpt Engine\GLM;D:\Dvpt Engine\GLFW\Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,7 +158,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Dvpt Engine\VulkanSDK\1.0.24.0\Include;D:\Dvpt Engine\GLM;D:\Dvpt Engine\GLFW\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Dvpt Engine\STB;D:\Dvpt Engine\VulkanSDK\1.0.24.0\Include;D:\Dvpt Engine\GLM;D:\Dvpt Engine\GLFW\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
