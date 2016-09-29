@@ -33,6 +33,8 @@ namespace zLeafEngine
 		createTextureImage();
 		createTextureImageView();
 		createTextureSampler();
+		//VertexBuffer
+		loadModel();
 		createVertexBuffer();
 		createIndexBuffer();
 		createUniformBuffer();

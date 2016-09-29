@@ -15,15 +15,20 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/hash.hpp>
 
 //STB Header
 #include <stb_image.h>
+
+//TinyOBJ Header
+#include <tiny_obj_loader.h>
 
 #include <iostream>
 #include <stdexcept>
 #include <functional>
 #include <vector>
 #include <cstring>
+#include <unordered_map>
 #include <map>
 #include <set>
 #include <algorithm>

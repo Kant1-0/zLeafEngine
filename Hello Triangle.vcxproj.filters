@@ -112,9 +112,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\shader.vert">
+    <Image Include="textures\chalet.jpg">
       <Filter>Fichiers de ressources</Filter>
-    </None>
+    </Image>
+    <Image Include="textures\texture.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="shaders\shader.frag">
       <Filter>Fichiers de ressources</Filter>
     </None>
@@ -124,10 +129,13 @@
     <None Include="shaders\vert.spv">
       <Filter>Fichiers de ressources</Filter>
     </None>
+    <None Include="shaders\shader.vert">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\texture.jpg">
+    <Object Include="models\chalet.obj">
       <Filter>Fichiers de ressources</Filter>
-    </Image>
+    </Object>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 
-//Defines functions bodies for STB
+//Defines functions bodies
 #define STB_IMAGE_IMPLEMENTATION 
+#define TINYOBJLOADER_IMPLEMENTATION
 
 #include "App.h"
 

@@ -15,6 +15,10 @@ namespace zLeafEngine
 	extern const char* WINDOW_TITLE;
 	extern const char* APPLICATION_TITLE;
 	extern const char* ENGINE_TITLE;
+
+	//Model
+	extern const std::string MODEL_PATH;
+	extern const std::string TEXTURE_PATH;
 }
 
 #endif // !_MACROS_H

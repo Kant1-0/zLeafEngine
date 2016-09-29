@@ -13,7 +13,7 @@ namespace zLeafEngine
 {
 	class VertexBuffers : protected VBuffer //-> GraphicsPipeline
 	{
-		protected:
+		public:
 			//Vertex Data
 			struct Vertex
 			{
@@ -25,8 +25,11 @@ namespace zLeafEngine
 				static VkVertexInputBindingDescription getBindingDescription();
 				///Attribute Descriptions
 				static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions();
+
+				bool operator==(const Vertex& other) const;
 			};
 
+		protected:
 			struct UniformBufferObject
 			{
 				glm::mat4 model;
@@ -34,6 +37,9 @@ namespace zLeafEngine
 				glm::mat4 proj;
 			};
 
+			///Model Import
+			std::vector<Vertex> modelVertices;
+			std::vector<uint32_t> modelIndices;
 			///Triangle
 			static const std::vector<Vertex> triangleVertices;
 			///Rectangle
@@ -43,6 +49,9 @@ namespace zLeafEngine
 			//Uniform Buffer Object
 			void createUniformBuffer();
 			void updateUniformBuffer();
+
+			//Load Model
+			void loadModel();
 
 			//Vertex Buffer
 			void createVertexBuffer();
@@ -62,6 +71,17 @@ namespace zLeafEngine
 			VDeleter<VkDeviceMemory> indexBufferMemory{ mDevice, vkFreeMemory };
 			VDeleter<VkDeviceMemory> uniformStagingBufferMemory{ mDevice, vkFreeMemory };
 			VDeleter<VkDeviceMemory> uniformBufferMemory{ mDevice, vkFreeMemory };
+	};
+}
+
+namespace std
+{
+	template<> struct hash<zLeafEngine::VertexBuffers::Vertex>
+	{
+		size_t operator()(zLeafEngine::VertexBuffers::Vertex const& vertex) const
+		{
+			return ((hash<glm::vec3>()(vertex.pos) ^ (hash<glm::vec3>()(vertex.color) << 1)) >> 1) ^ (hash<glm::vec2>()(vertex.texCoord) << 1);
+		}
 	};
 }
 

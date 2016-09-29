@@ -32,6 +32,45 @@ namespace zLeafEngine
 	};
 
 	//Vertex Buffer Functions
+	void VertexBuffers::loadModel()
+	{
+		tinyobj::attrib_t attrib;
+		std::vector<tinyobj::shape_t> shapes;
+		std::vector<tinyobj::material_t> materials;
+		std::string err;
+
+		if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, MODEL_PATH.c_str()))
+		{
+			throw std::runtime_error(err);
+		}
+
+		std::unordered_map<Vertex, int> uniqueVertices = {};
+
+		for (const auto& shape : shapes) {
+			for (const auto& index : shape.mesh.indices) {
+				Vertex vertex = {};
+
+				vertex.pos = {
+					attrib.vertices[3 * index.vertex_index + 0],
+					attrib.vertices[3 * index.vertex_index + 1],
+					attrib.vertices[3 * index.vertex_index + 2]
+				};
+
+				vertex.texCoord = {
+					attrib.texcoords[2 * index.texcoord_index + 0],
+					1.0f - attrib.texcoords[2 * index.texcoord_index + 1]
+				};
+
+				if (uniqueVertices.count(vertex) == 0) {
+					uniqueVertices[vertex] = static_cast<int>(modelVertices.size());
+					modelVertices.push_back(vertex);
+				}
+
+				modelIndices.push_back(uniqueVertices[vertex]);
+			}
+		}
+	}
+
 	void VertexBuffers::createUniformBuffer()
 	{
 		VkDeviceSize bufferSize = sizeof(UniformBufferObject);
@@ -96,9 +135,14 @@ namespace zLeafEngine
 		return attributeDescriptions;
 	}
 
+	bool VertexBuffers::Vertex::operator==(const Vertex& other) const
+	{
+		return pos == other.pos && color == other.color && texCoord == other.texCoord;
+	}
+
 	void VertexBuffers::createVertexBuffer()
 	{
-		VkDeviceSize bufferSize = sizeof(rectangleVertices[0]) * rectangleVertices.size();
+		VkDeviceSize bufferSize = sizeof(modelVertices[0]) * modelVertices.size();
 
 		VDeleter<VkBuffer> stagingBuffer{ mDevice, vkDestroyBuffer };
 		VDeleter<VkDeviceMemory> stagingBufferMemory{ mDevice, vkFreeMemory };
@@ -106,7 +150,7 @@ namespace zLeafEngine
 
 		void* data;
 		vkMapMemory(mDevice, stagingBufferMemory, 0, bufferSize, 0, &data);
-		memcpy(data, rectangleVertices.data(), (size_t)bufferSize);
+		memcpy(data, modelVertices.data(), (size_t)bufferSize);
 		vkUnmapMemory(mDevice, stagingBufferMemory);
 
 		createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, vertexBuffer, vertexBufferMemory);
@@ -118,7 +162,7 @@ namespace zLeafEngine
 
 	void VertexBuffers::createIndexBuffer()
 	{
-		VkDeviceSize bufferSize = sizeof(rectangleIndices[0]) * rectangleIndices.size();
+		VkDeviceSize bufferSize = sizeof(modelIndices[0]) * modelIndices.size();
 
 		VDeleter<VkBuffer> stagingBuffer{ mDevice, vkDestroyBuffer };
 		VDeleter<VkDeviceMemory> stagingBufferMemory{ mDevice, vkFreeMemory };
@@ -126,7 +170,7 @@ namespace zLeafEngine
 
 		void* data;
 		vkMapMemory(mDevice, stagingBufferMemory, 0, bufferSize, 0, &data);
-		memcpy(data, rectangleIndices.data(), (size_t)bufferSize);
+		memcpy(data, modelIndices.data(), (size_t)bufferSize);
 		vkUnmapMemory(mDevice, stagingBufferMemory);
 
 		createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, indexBuffer, indexBufferMemory);

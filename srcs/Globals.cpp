@@ -8,4 +8,7 @@ namespace zLeafEngine
 	const char* WINDOW_TITLE = "Vulkan - zLeaf Engine";
 	const char* APPLICATION_TITLE = "Hello Triangle";
 	const char* ENGINE_TITLE = "zLeaf Engine";
+
+	const std::string MODEL_PATH = "models/chalet.obj";
+	const std::string TEXTURE_PATH = "textures/chalet.jpg";
 }
