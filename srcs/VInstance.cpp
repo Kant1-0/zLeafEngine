@@ -77,7 +77,7 @@ namespace zLeafEngine
 		createInfo.pApplicationInfo = &appInfo;
 		if (enableValidationLayers)
 		{
-			createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+			createInfo.enabledLayerCount = (uint32_t)(validationLayers.size());
 			createInfo.ppEnabledLayerNames = validationLayers.data();
 		}
 		else
@@ -87,7 +87,7 @@ namespace zLeafEngine
 
 		// GLFW extensions
 		auto extensions = getRequiredExtensions();
-		createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
+		createInfo.enabledExtensionCount = (uint32_t)(extensions.size());
 		createInfo.ppEnabledExtensionNames = extensions.data();
 
 		// Create the actual instance

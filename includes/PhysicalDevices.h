@@ -11,7 +11,7 @@
 
 namespace zLeafEngine
 {
-	class PhysicalDevices : protected ValidationLayer //-> LogicalDevices
+	class PhysicalDevices : public ValidationLayer //-> LogicalDevices
 	{
 		protected:
 			//Physical Devices
@@ -45,7 +45,7 @@ namespace zLeafEngine
 			};
 
 			SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
-			
+
 		private:
 			//Physical Devices
 			bool checkDeviceExtensionSupport(VkPhysicalDevice device);

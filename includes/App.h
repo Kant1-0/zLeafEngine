@@ -11,19 +11,23 @@
 
 namespace zLeafEngine
 {
-	class App : private GInput
+	class App : public GInput
 	{
 		public:
 			//Init App Point
 			void run();
 
 		private:
-			//Init App Point
-			void initWindow();
+			//GLFW
+			void initGLFW();
+			//Vulkan
 			void initVulkan();
+			//Rendering Loop
 			void mainLoop();
+			//Callback
+			void initCallback();
 
-			//Window
+			//Window Resize
 			static void onWindowResized(GLFWwindow* window, int width, int height);
 	};
 }

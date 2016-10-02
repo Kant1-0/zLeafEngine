@@ -10,7 +10,7 @@
 
 namespace zLeafEngine
 {
-	class LogicalDevices : protected PhysicalDevices //-> VTextures
+	class LogicalDevices : public PhysicalDevices //-> VTextures
 	{
 		protected:
 			//Commands (FrameBuffer)

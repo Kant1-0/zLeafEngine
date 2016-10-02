@@ -1,7 +1,7 @@
 
 #include "VDeleter.h"
 
-namespace Hello
+namespace zLeafEngine
 {
 	template <typename T>
 	VDeleter<T>::VDeleter() : VDeleter([](T _) {})
@@ -45,6 +45,13 @@ namespace Hello
 	VDeleter<T>::operator T() const
 	{
 		return object;
+	}
+
+	template <typename T>
+	T* VDeleter<T>::replace()
+	{
+		cleanup();
+		return &object;
 	}
 
 	template <typename T>

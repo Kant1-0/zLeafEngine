@@ -7,18 +7,23 @@
 #define _DRAWFRAME_H
 
 #include "stdafx.h"
-#include "DepthBuffers.h"
+#include "CameraProjection.h"
 
 namespace zLeafEngine
 {
-	class DrawFrame : protected DepthBuffers // -> GInput
+	class DrawFrame : public CameraProjection // -> GInput
 	{
 		protected:
+			//Update Frame
+			void recreateSwapChain();
+			void updateUniformBuffer();
+
 			//Draw Frame
 			void drawFrame();
 
-			//Update Frame
-			void recreateSwapChain();
+			//Framerate
+			float deltaTime;
+			float lastFrame;
 	};
 }
 

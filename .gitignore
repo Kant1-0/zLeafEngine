@@ -240,3 +240,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/models/bebetrex.mtl
+/textures/bebetrex.jpg

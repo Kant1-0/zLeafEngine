@@ -20,12 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="srcs\App.cpp" />
+    <ClCompile Include="srcs\CameraProjection.cpp" />
     <ClCompile Include="srcs\DepthBuffers.cpp" />
     <ClCompile Include="srcs\DrawFrame.cpp" />
     <ClCompile Include="srcs\FrameBuffers.cpp" />
     <ClCompile Include="srcs\GInput.cpp" />
+    <ClCompile Include="srcs\GInput_Base.cpp" />
     <ClCompile Include="srcs\Globals.cpp" />
     <ClCompile Include="srcs\GraphicsPipeline.cpp" />
+    <ClCompile Include="srcs\GWindow.cpp" />
     <ClCompile Include="srcs\LogicalDevices.cpp" />
     <ClCompile Include="srcs\main.cpp" />
     <ClCompile Include="srcs\PhysicalDevices.cpp" />
@@ -37,11 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\App.h" />
+    <ClInclude Include="includes\CameraProjection.h" />
     <ClInclude Include="includes\DepthBuffers.h" />
     <ClInclude Include="includes\DrawFrame.h" />
     <ClInclude Include="includes\FrameBuffers.h" />
     <ClInclude Include="includes\GInput.h" />
+    <ClInclude Include="includes\GInput_Base.h" />
     <ClInclude Include="includes\GraphicsPipeline.h" />
+    <ClInclude Include="includes\GWindow.h" />
     <ClInclude Include="includes\LogicalDevices.h" />
     <ClInclude Include="includes\Globals.h" />
     <ClInclude Include="includes\PhysicalDevices.h" />
@@ -54,6 +60,14 @@
     <ClInclude Include="includes\VTexels.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="models\bebetrex.mtl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="models\cube.mtl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="textures\chalet.jpg">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -100,6 +114,32 @@
       <FileType>Document</FileType>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="models\bebetrex.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="textures\cube.jpg">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="models\cube.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="textures\bebetrex.jpg">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">

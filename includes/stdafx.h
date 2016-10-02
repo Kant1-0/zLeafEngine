@@ -19,6 +19,7 @@
 
 //STB Header
 #include <stb_image.h>
+#include <stb_image_resize.h>
 
 //TinyOBJ Header
 #include <tiny_obj_loader.h>

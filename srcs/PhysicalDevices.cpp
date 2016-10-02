@@ -34,7 +34,7 @@ namespace zLeafEngine
 		std::map<int64_t, VkPhysicalDevice> candidates;
 
 		std::cout << "--Found " << devices.size() << " graphics devices:\n";
-		for (const auto& device : devices)
+		for (const auto &device : devices)
 		{
 			int64_t score = rateDeviceSuitability(device);
 			std::cout << "\t" << "Score = " << score << "\n";
@@ -90,8 +90,8 @@ namespace zLeafEngine
 			SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device);
 			swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
 
-			score += static_cast<int64_t>(swapChainSupport.capabilities.maxImageArrayLayers);
-			score += static_cast<int64_t>(swapChainSupport.capabilities.maxImageCount);
+			score += (int64_t)(swapChainSupport.capabilities.maxImageArrayLayers);
+			score += (int64_t)(swapChainSupport.capabilities.maxImageCount);
 
 			//Zero maxImageCount means illimited (usual value is 8)
 			if (swapChainSupport.capabilities.maxImageCount == 0)
@@ -140,15 +140,15 @@ namespace zLeafEngine
 		{
 			if (queueFamily.queueCount > 0 && queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
 			{
-				indices.graphicsFamily = static_cast<int32_t>(i);
+				indices.graphicsFamily = (int32_t)(i);
 			}
 
 			VkBool32 presentSupport = false;
-			vkGetPhysicalDeviceSurfaceSupportKHR(device, static_cast<uint32_t>(i), surface, &presentSupport);
+			vkGetPhysicalDeviceSurfaceSupportKHR(device, (uint32_t)(i), surface, &presentSupport);
 
 			if (queueFamily.queueCount > 0 && presentSupport)
 			{
-				indices.presentFamily = static_cast<int32_t>(i);
+				indices.presentFamily = (int32_t)(i);
 			}
 
 			if (indices.isComplete())

@@ -34,6 +34,8 @@ namespace zLeafEngine
 	//Vertex Buffer Functions
 	void VertexBuffers::loadModel()
 	{
+		std::cout << "  ... Loading model ...";
+
 		tinyobj::attrib_t attrib;
 		std::vector<tinyobj::shape_t> shapes;
 		std::vector<tinyobj::material_t> materials;
@@ -62,13 +64,15 @@ namespace zLeafEngine
 				};
 
 				if (uniqueVertices.count(vertex) == 0) {
-					uniqueVertices[vertex] = static_cast<int>(modelVertices.size());
+					uniqueVertices[vertex] = (int)(modelVertices.size());
 					modelVertices.push_back(vertex);
 				}
 
 				modelIndices.push_back(uniqueVertices[vertex]);
 			}
 		}
+
+		std::cout << "\r                         \r--Model loaded!\n";
 	}
 
 	void VertexBuffers::createUniformBuffer()
@@ -77,27 +81,6 @@ namespace zLeafEngine
 
 		createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, uniformStagingBuffer, uniformStagingBufferMemory);
 		createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, uniformBuffer, uniformBufferMemory);
-	}
-
-	void VertexBuffers::updateUniformBuffer()
-	{
-		static auto startTime = std::chrono::high_resolution_clock::now();
-
-		auto currentTime = std::chrono::high_resolution_clock::now();
-		float time = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime).count() / 1000.0f;
-
-		UniformBufferObject ubo = {};
-		ubo.model = glm::rotate(glm::mat4(), time * glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 10.0f);
-		ubo.proj[1][1] *= -1;
-
-		void* data;
-		vkMapMemory(mDevice, uniformStagingBufferMemory, 0, sizeof(ubo), 0, &data);
-		memcpy(data, &ubo, sizeof(ubo));
-		vkUnmapMemory(mDevice, uniformStagingBufferMemory);
-
-		copyBuffer(uniformStagingBuffer, uniformBuffer, sizeof(ubo));
 	}
 
 	VkVertexInputBindingDescription VertexBuffers::Vertex::getBindingDescription()

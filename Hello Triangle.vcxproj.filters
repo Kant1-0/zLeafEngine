@@ -60,6 +60,15 @@
     <ClCompile Include="srcs\DrawFrame.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="srcs\GWindow.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="srcs\GInput_Base.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="srcs\CameraProjection.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\App.h">
@@ -110,14 +119,15 @@
     <ClInclude Include="includes\DepthBuffers.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="textures\chalet.jpg">
-      <Filter>Fichiers de ressources</Filter>
-    </Image>
-    <Image Include="textures\texture.jpg">
-      <Filter>Fichiers de ressources</Filter>
-    </Image>
+    <ClInclude Include="includes\GWindow.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\GInput_Base.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\CameraProjection.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\shader.frag">
@@ -132,10 +142,36 @@
     <None Include="shaders\shader.vert">
       <Filter>Fichiers de ressources</Filter>
     </None>
+    <None Include="textures\chalet.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="textures\texture.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="models\chalet.obj">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="models\bebetrex.mtl">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="models\cube.mtl">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="models\chalet.obj">
+    <Object Include="models\bebetrex.obj">
       <Filter>Fichiers de ressources</Filter>
     </Object>
+    <Object Include="models\cube.obj">
+      <Filter>Fichiers de ressources</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\cube.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="textures\bebetrex.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

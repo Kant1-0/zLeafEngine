@@ -15,6 +15,7 @@ namespace zLeafEngine
 	extern const char* WINDOW_TITLE;
 	extern const char* APPLICATION_TITLE;
 	extern const char* ENGINE_TITLE;
+	extern const char* GLFW_ICON;
 
 	//Model
 	extern const std::string MODEL_PATH;

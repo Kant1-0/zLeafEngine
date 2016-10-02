@@ -10,7 +10,7 @@
 
 namespace zLeafEngine
 {
-	class VBuffer : protected LogicalDevices //-> VertexBuffer
+	class VBuffer : public LogicalDevices //-> VertexBuffer
 	{
 		protected:
 		//Buffer Creation

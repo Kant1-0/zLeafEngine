@@ -13,7 +13,7 @@ namespace zLeafEngine
 
 		VkDescriptorPoolCreateInfo poolInfo = {};
 		poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-		poolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
+		poolInfo.poolSizeCount = (uint32_t)(poolSizes.size());
 		poolInfo.pPoolSizes = poolSizes.data();
 		poolInfo.maxSets = 1;
 		poolInfo.flags = 0; /// Optional
@@ -68,7 +68,7 @@ namespace zLeafEngine
 		descriptorWrites[1].descriptorCount = 1;
 		descriptorWrites[1].pImageInfo = &imageInfo;
 
-		vkUpdateDescriptorSets(mDevice, static_cast<uint32_t>(descriptorWrites.size()), descriptorWrites.data(), 0, nullptr);
+		vkUpdateDescriptorSets(mDevice, (uint32_t)(descriptorWrites.size()), descriptorWrites.data(), 0, nullptr);
 
 		std::cout << "--Descriptor Set created!\n";
 	}
@@ -84,7 +84,7 @@ namespace zLeafEngine
 			VkFramebufferCreateInfo framebufferInfo = {};
 			framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
 			framebufferInfo.renderPass = mRenderPass;
-			framebufferInfo.attachmentCount = static_cast<uint32_t>(attachments.size());
+			framebufferInfo.attachmentCount = (uint32_t)(attachments.size());
 			framebufferInfo.pAttachments = attachments.data();
 			framebufferInfo.width = swapChainExtent.width;
 			framebufferInfo.height = swapChainExtent.height;
@@ -121,7 +121,7 @@ namespace zLeafEngine
 		//Recreating Swap Chain
 		if (commandBuffers.size() > 0)
 		{
-			vkFreeCommandBuffers(mDevice, commandPool, static_cast<uint32_t>(commandBuffers.size()), commandBuffers.data());
+			vkFreeCommandBuffers(mDevice, commandPool, (uint32_t)(commandBuffers.size()), commandBuffers.data());
 		}
 
 		//Allocate Command buffer
@@ -144,7 +144,6 @@ namespace zLeafEngine
 			VkCommandBufferBeginInfo beginInfo = {};
 			beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
 			beginInfo.flags = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT;
-			beginInfo.pInheritanceInfo = nullptr; /// Optional
 
 			vkBeginCommandBuffer(commandBuffers[i], &beginInfo);
 
@@ -160,7 +159,7 @@ namespace zLeafEngine
 			clearValues[0].color = { 0.12f, 0.13f, 0.14f, 1.0f };
 			clearValues[1].depthStencil = { 1.0f, 0 };
 
-			renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
+			renderPassInfo.clearValueCount = (uint32_t)(clearValues.size());
 			renderPassInfo.pClearValues = clearValues.data();
 
 			//Basic Drawing Commands
@@ -176,7 +175,7 @@ namespace zLeafEngine
 
 				vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &descriptorSet, 0, nullptr);
 
-				vkCmdDrawIndexed(commandBuffers[i], static_cast<uint32_t>(modelIndices.size()), 1, 0, 0, 0);
+				vkCmdDrawIndexed(commandBuffers[i], (uint32_t)(modelIndices.size()), 1, 0, 0, 0);
 
 			vkCmdEndRenderPass(commandBuffers[i]);
 

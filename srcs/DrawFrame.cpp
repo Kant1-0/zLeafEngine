@@ -51,7 +51,6 @@ namespace zLeafEngine
 		presentInfo.swapchainCount = 1;
 		presentInfo.pSwapchains = swapChains;
 		presentInfo.pImageIndices = &imageIndex;
-		presentInfo.pResults = nullptr; /// Optional
 
 		result = vkQueuePresentKHR(presentQueue, &presentInfo);
 
@@ -70,6 +69,8 @@ namespace zLeafEngine
 	{
 		vkDeviceWaitIdle(mDevice);
 
+		perspectiveProj.ratio = swapChainExtent.width / (float)swapChainExtent.height;
+
 		createSwapChain();
 		createImageViews();
 		createRenderPass();
@@ -77,5 +78,25 @@ namespace zLeafEngine
 		createDepthResources();
 		createFramebuffers();
 		createCommandBuffers();
+	}
+
+	void DrawFrame::updateUniformBuffer()
+	{
+		/*static auto startTime = std::chrono::high_resolution_clock::now();
+
+		auto currentTime = std::chrono::high_resolution_clock::now();
+		float time = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime).count() / 1000.0f;*/
+
+		ubo.model = modelView;
+		ubo.view = glm::lookAt(cameraView.pos, cameraView.target, cameraView.up);
+		ubo.proj = glm::perspective(perspectiveProj.fov, perspectiveProj.ratio, perspectiveProj.nearView, perspectiveProj.farView);
+		ubo.proj[1][1] *= -1;
+
+		void* data;
+		vkMapMemory(mDevice, uniformStagingBufferMemory, 0, sizeof(ubo), 0, &data);
+		memcpy(data, &ubo, sizeof(ubo));
+		vkUnmapMemory(mDevice, uniformStagingBufferMemory);
+
+		copyBuffer(uniformStagingBuffer, uniformBuffer, sizeof(ubo));
 	}
 }

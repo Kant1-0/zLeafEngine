@@ -11,7 +11,7 @@
 
 namespace zLeafEngine
 {
-	class VertexBuffers : protected VBuffer //-> GraphicsPipeline
+	class VertexBuffers : public VBuffer //-> GraphicsPipeline
 	{
 		public:
 			//Vertex Data
@@ -37,6 +37,8 @@ namespace zLeafEngine
 				glm::mat4 proj;
 			};
 
+			UniformBufferObject ubo = {};
+
 			///Model Import
 			std::vector<Vertex> modelVertices;
 			std::vector<uint32_t> modelIndices;
@@ -48,7 +50,6 @@ namespace zLeafEngine
 
 			//Uniform Buffer Object
 			void createUniformBuffer();
-			void updateUniformBuffer();
 
 			//Load Model
 			void loadModel();
@@ -65,12 +66,13 @@ namespace zLeafEngine
 			VDeleter<VkBuffer> uniformStagingBuffer{ mDevice, vkDestroyBuffer };
 			VDeleter<VkBuffer> uniformBuffer{ mDevice, vkDestroyBuffer };
 
+			VDeleter<VkDeviceMemory> uniformStagingBufferMemory{ mDevice, vkFreeMemory };
+			VDeleter<VkDeviceMemory> uniformBufferMemory{ mDevice, vkFreeMemory };
+
 		private:
 			//Buffer Memories
 			VDeleter<VkDeviceMemory> vertexBufferMemory{ mDevice, vkFreeMemory };
 			VDeleter<VkDeviceMemory> indexBufferMemory{ mDevice, vkFreeMemory };
-			VDeleter<VkDeviceMemory> uniformStagingBufferMemory{ mDevice, vkFreeMemory };
-			VDeleter<VkDeviceMemory> uniformBufferMemory{ mDevice, vkFreeMemory };
 	};
 }
 

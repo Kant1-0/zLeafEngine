@@ -12,7 +12,7 @@
 
 namespace zLeafEngine
 {
-	class GraphicsPipeline : protected VertexBuffers //-> FrameBuffers
+	class GraphicsPipeline : public VertexBuffers //-> FrameBuffers
 	{
 		protected:
 			//Descriptor Set Layout

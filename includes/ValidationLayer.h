@@ -12,7 +12,7 @@
 
 namespace zLeafEngine
 {
-	class ValidationLayer: protected VInstance //-> LogicalDevices
+	class ValidationLayer: public VInstance //-> LogicalDevices
 	{
 		protected:
 			//Validation Layer (Debug)

@@ -11,7 +11,7 @@
 
 namespace zLeafEngine
 {
-	class FrameBuffers : protected GraphicsPipeline //-> VTexels
+	class FrameBuffers : public GraphicsPipeline //-> VTexels
 	{
 		protected:
 			//Descriptor Pool
@@ -47,6 +47,7 @@ namespace zLeafEngine
 
 			//Frame Buffers
 			std::vector<VDeleter<VkFramebuffer>> swapChainFramebuffers;
+
 	};
 }
 

@@ -10,7 +10,7 @@
 
 namespace zLeafEngine
 {
-	class DepthBuffers : protected VTexels //-> DrawFrame
+	class DepthBuffers : public VTexels //-> CameraProjection
 	{
 		protected:
 			//Depth Ressources

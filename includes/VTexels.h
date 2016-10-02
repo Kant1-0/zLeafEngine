@@ -10,7 +10,7 @@
 
 namespace zLeafEngine
 {
-	class VTexels : protected FrameBuffers //-> DepthBuffers
+	class VTexels : public FrameBuffers //-> DepthBuffers
 	{
 		protected:
 			//Loading Images

@@ -5,8 +5,9 @@ namespace zLeafEngine
 {
 	void	App::run()
 	{
-		initWindow();
+		initGLFW();
 		initVulkan();
+		initCallback();
 		mainLoop();
 	}
 
@@ -48,8 +49,18 @@ namespace zLeafEngine
 
 	void	App::mainLoop()
 	{
+		initView();
+		deltaTime = 0.0f;
+		lastFrame = 0.0f;
+		cameraSpeed = 15.0f;
+
 		while (!glfwWindowShouldClose(window))
 		{
+			//Calcule framerate
+			float currentFrame = (float)glfwGetTime();
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
+
 			glfwPollEvents();
 
 			updateUniformBuffer();
@@ -59,23 +70,34 @@ namespace zLeafEngine
 		vkDeviceWaitIdle(mDevice);
 	}
 
-	void	App::initWindow()
+	void App::initGLFW()
 	{
 		glfwInit();
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+		glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
 
 		window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE, nullptr, nullptr);
 
-		//Resizable Window
-		glfwSetWindowUserPointer(window, this);
-		glfwSetWindowSizeCallback(window, App::onWindowResized);
+		GLFWimage icon[1];
+		loadIcon(GLFW_ICON, &(icon[0]));
 
-		//Input User Action
-		glfwSetKeyCallback(window, inputKeyCallback);
+		glfwSetWindowIcon(window, 1, icon);
+		glfwSetWindowUserPointer(window, this);
+
+		glfwSetWindowSizeCallback(window, onWindowResized);
 
 		std::cout << "--GLWF Initiation Succeeded!\n";
+	}
+
+	void App::initCallback()
+	{
+		setEventHandling();
+
+		glfwSetKeyCallback(window, inputKeyCallback_Dispatch);
+		glfwSetCursorPosCallback(window, inputMouseCallback_Dispatch);
+		glfwSetScrollCallback(window, inputScrollCallback_Dispatch);
 	}
 
 	void App::onWindowResized(GLFWwindow* window, int width, int height)
